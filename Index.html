@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name = "viewport" content="width=device-width,initial-scale=1"/>
+        <title>Text Editor</title>
+
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+                margin: 20px;
+                text-align: end;
+            }
+            h2{
+                text-align: center;
+                font-size: 30px;
+                font-family:'Courier New', Courier, monospace;
+                
+            }
+            .toolbar{
+                margin: bottom 10px;
+                text-align: center;
+                background-color: darkslategrey;
+                padding: 8px 15px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                border-radius: 2px;
+                max-width: 800px;
+                margin:0 auto 20px;
+            }
+            .toolbar button{
+                background: transparent;
+                border:none;
+                color: white;
+                font-size: 15px;
+                cursor: pointer;
+                padding: 5px 8px;
+                transition: background-color 0.2s;
+                margin: 10px;
+                padding: 6px 12px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+            .toolbar button:hover{
+                background-color: darkgray;
+                border-radius: 20px;
+            }
+            .toolbar img{
+                background-color:white;
+                width:30px;
+                height:30px;
+                filter:invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+
+            }
+            .toolbar button b,
+            .toolbar button i,
+            .toolbar button u{
+                color:white;
+                font-weight: bold;;
+            }
+            
+            #editor{
+                background-color: lightgrey;
+                border: 1px solid black;
+                min-height: 300px;
+                padding: 10px;
+                max-width: 800px;
+                margin: auto;
+                overflow-y:auto;
+                font-size: 16px;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+       <h2>Online Text Editing Application </h2>
+        <div class="toolbar">
+            <button onclick="format('bold')"><img src="Resource/bold.png"></button>
+            <button onclick="format('underline')"><img src="Resource/Underline.png"></button>
+            <button onclick="format('italic')"><img src="Resource/Italic.png"></button>
+            
+            <input type="color" onchange="changeColor(this.value)" title="Font Color"/>
+
+            <button onclick="align('left')" title="Align Left"><img src="Resource/Left.svg"></button>
+            <button onclick="align('center')" title="Align Center"><img src="Resource/Center.png"></buttton>
+            <button onclick="align('right')" title="Align Right"><img src="Resource/Right.png"></button>
+            <button onclick="align('justify')" title="Justify"><img src="Resource/justify.png"></button>
+            <button onclick="undo()" title="Undo"><img src="Resource/Undo.png"></button>
+            <button onclick="redo()" title="Redo"><img src="Resource/redo.png"></button>
+        </div>
+
+        <div id="editor" contenteditable="true">
+        </div>
+
+        <script>
+            function format(command){
+                document.execCommand(command,false,null);
+            }
+            function changeColor(color){
+                document.execCommand('foreColor',false,color);
+            }
+            function align(direction){
+                const editor = document.getElementById('editor');
+                editor.style.textAlign= direction;
+            }
+            function undo(){
+                document.execCommand('undo',false,null);
+            }
+            function redo(){
+                document.execCommand('redo',false,null);
+            }
+        </script>
+        
+    </body>
+</html>
